@@ -9,24 +9,24 @@ import {
   Ellipsis,
 } from "./styled/styled";
 
-export function Jetton() {
+export function Jettonhund() {
   const {connected, wallet} = useTonConnect()
-  const {jettonWalletAddress, balance, mint1} = useJettonContract()
+  const {jettonWalletAddress, balance, mint100} = useJettonContract()
 
   return (
     <Card title="Jetton">
       <FlexBoxCol>
-        <p className="headersize gainsboro">Plant 1 Tree</p>
+        <p className="headersize gainsboro">Plant 100 Trees</p>
         <FlexBoxCol>
           <div className="between betweenmargin">
             <span className="youwillget">You will get</span>
-            <span className="gainsboro youwillget2">1 Tree</span>
+            <span className="gainsboro youwillget2">100 Trees</span>
           </div>
 
         </FlexBoxCol>
         <Button
-          disabled={!connected} onClick={mint1}>
-          Plant your Tree
+          disabled={!connected} onClick={mint100}>
+          Plant your Trees
         </Button>
       </FlexBoxCol>
     </Card>

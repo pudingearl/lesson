@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Address, fromNano, OpenedContract, toNano } from "ton-core";
-import {Mint, SampleJetton} from "../../build/SampleJetton/tact_SampleJetton";
+import {Mint, MintPublic, SampleJetton} from "../../build/SampleJetton/tact_SampleJetton";
 import {JettonDefaultWallet} from "../../build/SampleJetton/tact_JettonDefaultWallet";
 import { useAsyncInitialize } from "./useAsyncInitialize";
 import { useTonClient } from "./useTonClient";
@@ -16,7 +16,7 @@ export function useJettonContract() {
     const jettonContract = useAsyncInitialize(async()=>{
         if(!client || !wallet) return;
 
-        const contract = SampleJetton.fromAddress(Address.parse("EQB8StgTQXidy32a8xfu7j4HMoWYV0b0cFM8nXsP2cza_b7Y"))
+        const contract = SampleJetton.fromAddress(Address.parse("EQBqWL2-b4Jqq95Rt-d_DbeqltFDgRAK0iY87MI1wE5VlFFy"))
 
         return client.open(contract) as OpenedContract<SampleJetton>
     }, [client, wallet])
@@ -48,14 +48,34 @@ export function useJettonContract() {
     return {
         jettonWalletAddress: jettonWalletContract?.address.toString(),
         balance: balance,
-        mint: () => {
-            const message: Mint = {
-                $$type: "Mint",
-                amount: 150n
+        mint1: () => {
+            const message: MintPublic = {
+                $$type: "MintPublic",
+                amount: toNano(0.5)
             }
 
             jettonContract?.send(sender, {
-                value: toNano("0.05")
+                value: toNano("0.5")
+            }, message)
+        },
+        mint10: () => {
+            const message: MintPublic = {
+                $$type: "MintPublic",
+                amount: toNano(10)
+            }
+
+            jettonContract?.send(sender, {
+                value: toNano("10")
+            }, message)
+        },
+        mint100: () => {
+            const message: MintPublic = {
+                $$type: "MintPublic",
+                amount: toNano(100)
+            }
+
+            jettonContract?.send(sender, {
+                value: toNano("100")
             }, message)
         }
     }

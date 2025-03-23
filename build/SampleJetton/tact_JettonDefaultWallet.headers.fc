@@ -9,9 +9,6 @@ slice __tact_verify_address(slice address) inline;
 ;; __tact_load_address
 (slice, slice) __tact_load_address(slice cs) inline;
 
-;; __tact_load_address_opt
-(slice, slice) __tact_load_address_opt(slice cs) inline;
-
 ;; __tact_store_address
 builder __tact_store_address(builder b, slice address) inline;
 
@@ -57,6 +54,9 @@ cell $TokenTransferInternal$_store_cell((int, int, slice, slice, int, slice) v) 
 ;; $TokenTransferInternal$_load
 (slice, ((int, int, slice, slice, int, slice))) $TokenTransferInternal$_load(slice sc_0) inline_ref;
 
+;; $TokenTransferInternal$_load_bounced
+(slice, ((int, int))) $TokenTransferInternal$_load_bounced(slice sc_0) inline;
+
 ;; $TokenNotification$_store
 builder $TokenNotification$_store(builder build_0, (int, int, slice, slice) v) inline;
 
@@ -71,6 +71,9 @@ builder $TokenBurnNotification$_store(builder build_0, (int, int, slice, slice) 
 
 ;; $TokenBurnNotification$_store_cell
 cell $TokenBurnNotification$_store_cell((int, int, slice, slice) v) inline;
+
+;; $TokenBurnNotification$_load_bounced
+(slice, ((int, int))) $TokenBurnNotification$_load_bounced(slice sc_0) inline;
 
 ;; $TokenExcesses$_store
 builder $TokenExcesses$_store(builder build_0, (int) v) inline;
@@ -114,8 +117,14 @@ slice $global_contractAddress((cell, cell) $s) impure inline;
 ;; $Context$_fun_readForwardFee
 int $Context$_fun_readForwardFee((int, slice, int, slice) $self) impure inline_ref;
 
+;; $TokenTransferInternal$_constructor_queryId_amount_from_response_destination_forward_ton_amount_forward_payload
+((int, int, slice, slice, int, slice)) $TokenTransferInternal$_constructor_queryId_amount_from_response_destination_forward_ton_amount_forward_payload(int queryId, int amount, slice from, slice response_destination, int forward_ton_amount, slice forward_payload) inline;
+
 ;; $JettonDefaultWallet$_init_child
 (cell, cell) $JettonDefaultWallet$_init_child(cell sys', slice $master, slice $owner) inline_ref;
+
+;; $JettonDefaultWallet$_fun_msgValue
+((int, slice, slice), int) $JettonDefaultWallet$_fun_msgValue((int, slice, slice) $self, int $value) impure inline_ref;
 
 ;; $JettonWalletData$_constructor_balance_owner_master_walletCode
 ((int, slice, slice, cell)) $JettonWalletData$_constructor_balance_owner_master_walletCode(int balance, slice owner, slice master, cell walletCode) inline;
@@ -123,23 +132,20 @@ int $Context$_fun_readForwardFee((int, slice, int, slice) $self) impure inline_r
 ;; $JettonDefaultWallet$_fun_get_wallet_data
 ((int, slice, slice), (int, slice, slice, cell)) $JettonDefaultWallet$_fun_get_wallet_data((int, slice, slice) $self) impure inline_ref;
 
-;; $TokenTransferInternal$_constructor_amount_queryId_from_responseAddress_forwardTonAmount_forwardPayload
-((int, int, slice, slice, int, slice)) $TokenTransferInternal$_constructor_amount_queryId_from_responseAddress_forwardTonAmount_forwardPayload(int amount, int queryId, slice from, slice responseAddress, int forwardTonAmount, slice forwardPayload) inline;
-
 ;; $SendParameters$_constructor_to_value_mode_bounce_body_code_data
 ((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_mode_bounce_body_code_data(slice to, int value, int mode, int bounce, cell body, cell code, cell data) inline;
-
-;; $SendParameters$_constructor_to_value_bounce_body
-((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_bounce_body(slice to, int value, int bounce, cell body) inline;
-
-;; $TokenNotification$_constructor_queryId_amount_from_forwardPayload
-((int, int, slice, slice)) $TokenNotification$_constructor_queryId_amount_from_forwardPayload(int queryId, int amount, slice from, slice forwardPayload) inline;
-
-;; $TokenExcesses$_constructor_queryId
-((int)) $TokenExcesses$_constructor_queryId(int queryId) inline;
 
 ;; $SendParameters$_constructor_to_value_mode_bounce_body
 ((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_mode_bounce_body(slice to, int value, int mode, int bounce, cell body) inline;
 
-;; $TokenBurnNotification$_constructor_queryId_amount_owner_responseAddress
-((int, int, slice, slice)) $TokenBurnNotification$_constructor_queryId_amount_owner_responseAddress(int queryId, int amount, slice owner, slice responseAddress) inline;
+;; $TokenNotification$_constructor_queryId_amount_from_forward_payload
+((int, int, slice, slice)) $TokenNotification$_constructor_queryId_amount_from_forward_payload(int queryId, int amount, slice from, slice forward_payload) inline;
+
+;; $SendParameters$_constructor_to_value_bounce_body_mode
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_bounce_body_mode(slice to, int value, int bounce, cell body, int mode) inline;
+
+;; $TokenExcesses$_constructor_queryId
+((int)) $TokenExcesses$_constructor_queryId(int queryId) inline;
+
+;; $TokenBurnNotification$_constructor_queryId_amount_owner_response_destination
+((int, int, slice, slice)) $TokenBurnNotification$_constructor_queryId_amount_owner_response_destination(int queryId, int amount, slice owner, slice response_destination) inline;
