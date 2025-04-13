@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://alefmanvladimir.github.io/my-twa",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "configbot": "node configure.js",
