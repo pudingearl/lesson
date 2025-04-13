@@ -16,7 +16,7 @@ export function useJettonContract() {
     const jettonContract = useAsyncInitialize(async()=>{
         if(!client || !wallet) return;
 
-        const contract = SampleJetton.fromAddress(Address.parse("EQBqWL2-b4Jqq95Rt-d_DbeqltFDgRAK0iY87MI1wE5VlFFy"))
+        const contract = SampleJetton.fromAddress(Address.parse("EQC5fRty5qx9iHKhHFtZxlIub3xc0_AaZLCnHmmIHWQWMa1E"))
 
         return client.open(contract) as OpenedContract<SampleJetton>
     }, [client, wallet])
@@ -51,11 +51,11 @@ export function useJettonContract() {
         mint1: () => {
             const message: MintPublic = {
                 $$type: "MintPublic",
-                amount: toNano(0.5)
+                amount: toNano(1),
             }
 
             jettonContract?.send(sender, {
-                value: toNano("0.5")
+                value: 500000000n
             }, message)
         },
         mint10: () => {
@@ -65,7 +65,7 @@ export function useJettonContract() {
             }
 
             jettonContract?.send(sender, {
-                value: toNano("10")
+                value: toNano("5")
             }, message)
         },
         mint100: () => {
@@ -75,7 +75,7 @@ export function useJettonContract() {
             }
 
             jettonContract?.send(sender, {
-                value: toNano("100")
+                value: toNano("50")
             }, message)
         }
     }
